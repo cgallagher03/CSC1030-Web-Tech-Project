@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- PAGE 3 -->
+<html>
+    <head>
+        <title>UNHEARD</title>
+        <link href="css/standard.css" rel="stylesheet" type="text/css">
+        <script src="javascript/myJs.js" type="text/javascript"></script>
+    </head>
+    <body onload="initialiseGame(); setAppearance('game');">
+        <div class="wrapper">
+            <div class="head">
+                <h1>UNHEARD</h1>
+            </div>
+            <div id="game">
+                <div id="gameRightSide">
+                    <div class="progress">
+                        <div class="backing">
+                            <div class="bar">
+                                <span id="timer"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="openGuideBtn" onclick="showGuide();">Guide</button>
+                    <div id="scenes">
+                        <img id="sceneImg" src="images/bedroom.png" alt="bedroom scene" usemap="#bedroomMap">
+                        <map name="kitchenMap">
+                            <area shape="poly" coords="30,83,37,96,13,107,7,95"
+                                onclick="clueText('letter'); this.onclick=null;">
+                            <area shape="rect" coords="454,125,491,165" onclick="clueText('handbag'); this.onclick=null;">
+                        </map>
+                        <map name="bathroomMap">
+                            <area shape="rect" coords="351,134,403,189" onclick="clueText('bin'); this.onclick=null;">
+                        </map>
+                        <map name="bedroomMap">
+                            <area shape="rect" coords="377,189,400,203"
+                                onclick="clueText('creditCard'); this.onclick=null;">
+                            <area shape="poly" coords="335,80,299,89,303,96,338,88"
+                                onclick="clueText('knife'); this.onclick=null;">
+                        </map>
+                        <button type="button" onclick="previousImage('sceneImg');" style="float: left;"><img
+                                src="images/previous.png" alt="back button"></button>
+                        <button type="button" onclick="nextImage('sceneImg');" style="float: right;"><img
+                                src="images/next.png" alt="next button"></button>
+                    </div>
+                    <div id="userControls">
+                        <label for="enterCmd" style="font-family: 'Nova Mono', monospace; margin-left: 5px;">ENTER
+                            COMMAND:</label>
+                        <input type="text" id="enterCmd">
+                        <button type="button" id="sendCmdBtn" onclick="processInput();">Send</button>
+                        <button id="openSuspectsBtn" onclick="gameShowSuspects();">Arrest Suspect</button>
+                    </div>
+                </div>
+                <div id="gameLeftSide">
+
+                </div>
+                <div id="gameSuspectsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div class="suspectBriefs">
+                            <div class="suspectBrief">
+                                <img src="images/mrscarey.png" alt="Mrs Carey photo" class="suspectImg">
+                                <h3>Mrs Carey</h3><br><br>
+                                <p>Victim</p>
+                            </div>
+                            <input id="joanRdo" type="radio" name="suspectChoice" value="joan">
+                            <div class="suspectBrief" onclick="selectSuspect('joanRdo')">
+                                <img src="images/joan.png" alt="Joan photo" class="suspectImg">
+                                <h3>Joan</h3><br><br>
+                                <p>Daughter</p>
+                            </div>
+                            <input id="johnRdo" type="radio" name="suspectChoice" value="john">
+                            <div class="suspectBrief" onclick="selectSuspect('johnRdo')">
+                                <img src="images/john.png" alt="John photo" class="suspectImg">
+                                <h3>John</h3><br><br>
+                                <p>Son</p>
+                            </div>
+                            <div style="clear: both"></div>
+                            <input id="pollyRdo" type="radio" name="suspectChoice" value="polly">
+                            <div class="suspectBrief" onclick="selectSuspect('pollyRdo')">
+                                <img src="images/polly.png" alt="Polly photo" class="suspectImg">
+                                <h3>Polly</h3><br><br>
+                                <p>Daughter-in-law</p>
+                            </div>
+                            <input id="michaelRdo" type="radio" name="suspectChoice" value="michael">
+                            <div class="suspectBrief" onclick="selectSuspect('michaelRdo')">
+                                <img src="images/michael.png" alt="Michael photo" class="suspectImg">
+                                <h3>Michael</h3><br><br>
+                                <p>Grandson</p>
+                            </div>
+                            <input id="mollyRdo" type="radio" name="suspectChoice" value="molly">
+                            <div class="suspectBrief" onclick="selectSuspect('mollyRdo')">
+                                <img src="images/molly.png" alt="Molly photo" class="suspectImg">
+                                <h3>Molly</h3><br><br>
+                                <p>Granddaughter</p>
+                            </div>
+                            <div style="clear: both"></div>
+                            <button id="arrestSuspectBtn" onclick="arrestSuspectByRadio();">Arrest Suspect!</button>
+                            <span id="suspectErr" class="errorMsg" style="float: right; margin-top: 32px"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="guideModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h1>Commands</h1>
+                        <p>A range of instructions can be entered into the command line: </p>
+                        <ul>
+                            <li>
+                                "QUESTION *insert name*"- Questions the chosen suspect (from Joan, John, Polly, Michael and
+                                Molly). If you are the
+                                Private Detective, you will receive more detailed information.<br><br>
+                            </li>
+                            <li>
+                                "SNIFF *insert room name*"- If you are the Police Officer, you can instruct your dog to
+                                sniff the chosen room (from
+                                bedroom, kitchen and bathroom).<br><br>
+                            </li>
+                            <li>
+                                "SWAB *insert room name*"- If you are the Forensic Scientist, you can swab the chosen room
+                                for any hidden evidence (from
+                                bedroom, kitchen and bathroom).<br><br>
+                            </li>
+                            <li>
+                                "ARREST *insert name*"- Arrest the chosen suspect to finish the game (from Joan, John,
+                                Polly, Michael and Molly). Alternatively,
+                                you can arrest using the 'Arrest Suspect' button.<br><br>
+                            </li>
+                            <li>
+                                "EXIT"- Quit game.<br><br>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

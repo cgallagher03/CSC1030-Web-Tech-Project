@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- PAGE 2 -->
+<html>
+    <head>
+        <title>UNHEARD</title>
+        <link href="css/standard.css" rel="stylesheet" type="text/css">
+        <script src="javascript/myJs.js" type="text/javascript"></script>
+    </head>
+    <body onload="setAppearance('textIntro');">
+        <div class="wrapper">
+            <div class="head">
+                <h1>UNHEARD</h1>
+            </div>
+            <div id="textIntro">
+                <button id="startDebriefBtn" onclick="debriefText(); this.onclick=null">Begin Debrief</button>
+                <p id="debrief"></p>
+                <img id="file" src="images/file.png" alt="file icon" title="Open case information" class="hideMe" onclick="introShowSuspects();">
+
+                <div id="introSuspectsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>From what we've gathered, Mrs Carey was a very wealthy woman but was quite sick. Logically, she had a will in place- to separate
+                            her wealth between her daughter Joan and her son John. Joan has told us that Polly, Mrs Carey's daughter-in-law and John's husband,
+                            reluctantly helped her husband take care of their mother as she herself had to travel a lot from work. From what sources close to
+                            the family have said, there have been fallouts in the family recently which none of the suspects spoke of.
+                        </p>
+                        <br>
+                        <div class="suspectBriefs">
+                            <div class="suspectBrief">
+                                <img src="images/mrscarey.png" alt="Mrs Carey photo" class="suspectImg">
+                                <h3>Mrs Carey</h3><br><br>
+                                <p>Victim</p>
+                            </div>
+                            <div class="suspectBrief">
+                                <img src="images/joan.png" alt="Joan photo" class="suspectImg">
+                                <h3>Joan</h3><br><br>
+                                <p>Daughter</p>
+                            </div>
+                            <div class="suspectBrief">
+                                <img src="images/john.png" alt="John photo" class="suspectImg">
+                                <h3>John</h3><br><br>
+                                <p>Son</p>
+                            </div>
+                            <div class="suspectBrief">
+                                <img src="images/polly.png" alt="Polly photo" class="suspectImg">
+                                <h3>Polly</h3><br><br>
+                                <p>Daughter-in-law</p>
+                            </div>
+                            <div class="suspectBrief">
+                                <img src="images/michael.png" alt="Michael photo" class="suspectImg">
+                                <h3>Michael</h3><br><br>
+                                <p>Grandson</p>
+                            </div>
+                            <div class="suspectBrief">
+                                <img src="images/molly.png" alt="Molly photo" class="suspectImg">
+                                <h3>Molly</h3><br><br>
+                                <p>Granddaughter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="startGameBtn" class="hideMe" onclick="location.href='game.html'">Start Mission</button>
+            </div>
+        </div>
+    </body>
+</html>
